@@ -36,16 +36,4 @@ jobs:
         with:
           name: ExSearch ${{ github.ref_name }}
           files: ExSearch-${{ github.ref_name }}.zip
-          body: |
-            **🍰 2026-03-15 Version 1.0.0**
-
-            * 适配：[Typecho 1.3] 调整插件运行与对象获取方式，完善 1.3 环境兼容。
-            * 调整：[鉴权] `Action` 按 `action` 分流：`api` 公开只读，`rebuild` 保持登录限制。
-            * 调整：[API] 统一接口兜底返回，空 key/无索引/未知 action 均返回 `[]`。
-            * 调整：[前端] 搜索前端改为原生实现，去除运行时 jQuery 依赖。
-            * 兼容：[扩展] 保留 `ExSearchCall(item, ctx)`，并补充 `ctx.url` 等稳定上下文参数。
-            * 优化：[交互] 增加重复初始化保护，避免 PJAX/重复加载导致搜索层重复注入。
-            * 优化：[样式] 优化搜索界面样式并适配夜间模式，提升桌面与移动端一致性。
-            * 升级：[构建] 构建链升级至 Gulp 5 与新版 Sass/Autoprefixer/Rev 工具链。
-            * 升级：[CI] GitHub Actions 升级至 Node 20，并完善手动触发与发布权限配置。
-            * 调整：[文档] 更新 README 与更新日志，统一当前仓库地址与版本说明。
+          generate_release_notes: true

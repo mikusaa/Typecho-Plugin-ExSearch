@@ -12,6 +12,7 @@
 ## 使用
 
 - 下载本仓库（`master` 分支）：[下载](https://github.com/mikusaa/Typecho-Plugin-ExSearch/archive/master.zip)
+- 或从 Release 下载打包好的插件文件：[Releases](https://github.com/mikusaa/Typecho-Plugin-ExSearch/releases)
 - 解压后将文件夹重命名为 `ExSearch`
 - 上传至插件目录，在后台启用
 - 保存一次插件设置，并点击重建索引

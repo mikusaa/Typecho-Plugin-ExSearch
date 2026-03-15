@@ -1,6 +1,8 @@
 # Typecho-Plugin-ExSearch
 
-> 🔍 为 Typecho 1.3 提供前端实时搜索体验
+> 🔍 为 Typecho 带来实时搜索体验 [![build status](https://img.shields.io/travis/mikusaa/Typecho-Plugin-ExSearch/source.svg?style=flat-square)](https://travis-ci.org/mikusaa/Typecho-Plugin-ExSearch)
+
+![](https://wx2.sinaimg.cn/large/0060lm7Tly1g0c0wvk8s4j311b0n7qbr.jpg)
 
 ## 版本说明
 

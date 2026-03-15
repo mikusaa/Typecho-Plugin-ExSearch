@@ -8,9 +8,10 @@
  * 
  * @package ExSearch
  * @author 熊猫小A
- * @version 0.1
+ * @version 1.0
  * @link https://www.imalan.cn
  */
+use Typecho\Widget;
 
 class ExSearch_Plugin implements Typecho_Plugin_Interface
 {
@@ -103,14 +104,6 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
         );
         $form->addInput($t);
 
-        $t = new Typecho_Widget_Helper_Form_Element_Select(
-            'jq',
-            array('true' => '是','false' => '否'),
-            'true',
-            '引入 JQuery',
-            '是否引入 JQuery。<mark>若你的主题已经引入了，请务必关闭此项。</mark>'
-        );
-        $form->addInput($t);
     }
 
     /**
@@ -273,7 +266,7 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
         $className = "Widget_Abstract_{$table}";
         $key = $keys[$table];
         $db = Typecho_Db::get();
-        $widget = new $className(Typecho_Request::getInstance(), Typecho_Widget_Helper_Empty::getInstance());
+        $widget = Widget::widget($className);
         
         $db->fetchRow(
             $widget->select()->where("{$key} = ?", $pkId)->limit(1),
@@ -301,8 +294,8 @@ ExSearchConfig = {
         $row = $db->fetchRow($db->select()->from('table.exsearch')
                 ->order('table.exsearch.id', Typecho_Db::SORT_DESC)
                 ->limit(1));
-        $key = $row['key'];
-        if($setting->static == 'true'){
+        $key = empty($row) ? '' : $row['key'];
+        if($setting->static == 'true' && !empty($key)){
             Helper::options()->pluginUrl('ExSearch/cache/cache-'.$key.'.json');
         }else{
             Helper::options()->index('/ExSearch/?action=api&key='.$key);
@@ -322,11 +315,6 @@ ExSearchConfig = {
      */
     public static function footer()
     {
-        if(Helper::options()->plugin('ExSearch')->jq == 'true'){
-?>
-<script src="<?php Helper::options()->pluginUrl('ExSearch/assets/jquery.min.js'); ?>"></script>
-<?php           
-        }
 ?>
 <script src="<?php Helper::options()->pluginUrl('ExSearch/assets/ExSearch.js'); ?>"></script>
 <?php

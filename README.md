@@ -1,8 +1,10 @@
 # Typecho-Plugin-ExSearch
 
-> 🔍 为 Typecho 带来实时搜索体验 [![Build](https://github.com/mikusaa/Typecho-Plugin-ExSearch/workflows/Build/badge.svg)](https://github.com/mikusaa/Typecho-Plugin-ExSearch/actions)
+> 🔍 为 Typecho 带来实时搜索体验 
 
 ![](https://wx2.sinaimg.cn/large/0060lm7Tly1g0c0wvk8s4j311b0n7qbr.jpg)
+
+[![Build](https://github.com/mikusaa/Typecho-Plugin-ExSearch/workflows/Build/badge.svg)](https://github.com/mikusaa/Typecho-Plugin-ExSearch/actions) [![downloads](https://img.shields.io/github/downloads/mikusaa/Typecho-Plugin-VOID/total.svg?style=flat-square)](https://github.com/mikusaa/Typecho-Plugin-VOID/releases) [![](https://img.shields.io/github/release/mikusaa/Typecho-Plugin-VOID.svg?style=flat-square)](https://github.com/mikusaa/Typecho-Plugin-VOID/releases)
 
 ## 版本说明
 

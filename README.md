@@ -23,11 +23,8 @@
 
 ## API 与权限
 
-- `/ExSearch?action=api&key=...`：公开只读，返回轻量索引 JSON。索引包含标题、链接、日期、短摘要、分类、标签等数据，不包含完整正文。
-- `/ExSearch?action=query&key=...&q=...`：公开只读，按关键词查询文章与页面完整正文，最多返回 20 条结果与命中摘要片段。
+- `/ExSearch?action=api&key=...`：公开只读，返回索引 JSON。
 - `/ExSearch?action=rebuild`：需要后台登录，用于重建索引。
-
-开启静态化后，插件目录下的 `cache/cache-*.json` 只保存轻量索引。前端会先使用轻量索引即时搜索标题和短摘要，完整正文搜索再通过 `query` 接口按需补充。
 
 ## 自定义 Hook
 
@@ -81,7 +78,18 @@ function ExSearchCall(item, ctx) {
 
 ## 可能的问题
 
-如果站点内容很多，建议开启静态化。当前版本的静态缓存只保存轻量索引与短摘要，不再保存完整正文，因此通常不需要调大数据库 `max_allowed_packet`。
+如果站点内容过多导致建立索引失败，可在 `Plugin.php` 中取消以下两行注释：
+
+```php
+$sql = 'SET GLOBAL max_allowed_packet=4294967295;';
+$db->query($sql);
+```
+
+该操作需要数据库高级权限，也可手动执行：
+
+```bash
+mysql > SET GLOBAL max_allowed_packet=4294967295;
+```
 
 ## Credit
 

@@ -201,7 +201,8 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
                 'type' => $type,
                 'title' => $row['title'],
                 'date' => date('c', $row['created']),
-                'path' => $widget->permalink
+                'path' => $widget->permalink,
+                'excerpt' => self::excerpt($widget->content)
             );
 
             if($type == 'post')
@@ -239,6 +240,18 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
             $cache[]=$item;
         }
         return $cache;
+    }
+
+    /**
+     * 生成用于前端快速搜索的短摘要
+     *
+     * @access private
+     * @return string
+     */
+    private static function excerpt($content)
+    {
+        $text = trim(preg_replace('/\s+/u', ' ', strip_tags($content)));
+        return mb_substr($text, 0, 200, 'UTF-8');
     }
 
     /**
@@ -314,7 +327,7 @@ ExSearchConfig = {
     public static function footer()
     {
 ?>
-<script src="<?php Helper::options()->pluginUrl('ExSearch/assets/ExSearch-95742c4e84.js'); ?>"></script>
+<script src="<?php Helper::options()->pluginUrl('ExSearch/assets/ExSearch-e66f3ed367.js'); ?>"></script>
 <?php
     }
 }

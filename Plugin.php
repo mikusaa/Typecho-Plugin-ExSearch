@@ -125,14 +125,10 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
     {
         $db = Typecho_Db::get();
 
-        // 防止过大的内容导致 MySQL 报错，需要高级权限
-        // $sql = 'SET GLOBAL max_allowed_packet=4294967295;';
-        // $db->query($sql);
-
         // 删除原本的记录
         self::clean();
 
-        // 获取搜索范围配置，query 对应内容
+        // 获取搜索范围配置，生成轻量索引。正文全文由 query 接口按需查询。
         $cache = array();
         $cache['posts'] = self::build('post');
         $cache['pages'] = self::build('page');
@@ -201,10 +197,11 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
         foreach ($rows as $row) {
             $widget = self::widget('Contents', $row['cid']);
             $item = array(
+                'cid' => $row['cid'],
+                'type' => $type,
                 'title' => $row['title'],
                 'date' => date('c', $row['created']),
-                'path' => $widget->permalink,
-                'text' => strip_tags($widget->content)
+                'path' => $widget->permalink
             );
 
             if($type == 'post')
@@ -300,7 +297,8 @@ ExSearchConfig = {
         }else{
             Helper::options()->index('/ExSearch/?action=api&key='.$key);
         }
-    ?>"
+    ?>",
+    query : "<?php Helper::options()->index('/ExSearch/?action=query&key='.$key); ?>"
 }
 </script>
 <?php
@@ -316,7 +314,7 @@ ExSearchConfig = {
     public static function footer()
     {
 ?>
-<script src="<?php Helper::options()->pluginUrl('ExSearch/assets/ExSearch-bbda87763a.js'); ?>"></script>
+<script src="<?php Helper::options()->pluginUrl('ExSearch/assets/ExSearch-95742c4e84.js'); ?>"></script>
 <?php
     }
 }
